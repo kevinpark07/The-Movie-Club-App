@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import './App.css';
 import Header from './Components/Header'
 import Login from './Components/Login'
@@ -8,15 +8,19 @@ import MovieClubsContainer from './Containers/MovieClubsContainer'
 import User from './Components/User'
 import { Route, Switch } from 'react-router-dom'
 
-function App() {
+const App = () => {
+
+  
+
+
   return (
     <div>
       <Header />
       <Login />
       <NavBar />
       <Switch>
-        <Route path='/movies' component={MoviesContainer} />
-        <Route path ='/movieclubs' component={MovieClubsContainer} />
+        <Route path ='/clubs' render={() => <MovieClubsContainer />} />
+        <Route path='/movies' render={() => <MoviesContainer />} />
         <Route path='/user' component={User} />
       </Switch>
     </div>
