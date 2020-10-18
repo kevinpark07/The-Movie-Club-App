@@ -5,17 +5,9 @@ import { Route } from 'react-router-dom'
 
 const MoviesContainer = (props) => {
 
-    const [movieApi, setMovieApi] = useState([]);
-
-
-   useEffect(() => {
-      fetch("http://localhost:3000/movies")
-        .then(res => res.json())
-         .then(movieData => setMovieApi(movieData))
-   }, [])
 
    const renderMovies = () => {
-      return movieApi.map(movie => <Movie key={movie.id} movie={movie} />)
+      return props.movies.map(movie => <Movie key={movie.id} movie={movie} />)
    }
 
    return (
