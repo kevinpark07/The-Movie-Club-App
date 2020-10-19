@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Movie from '../Components/Movie';
 import Search from '../Components/Search';
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 
 const MoviesContainer = (props) => {
 
@@ -11,9 +11,14 @@ const MoviesContainer = (props) => {
    }
 
    return (
-      <>
-         {renderMovies()}
-      </>
+      <div>
+         {props.user ? 
+               renderMovies()
+         : 
+            <Redirect to='/home' /> 
+         }
+        
+      </div>
    )
 }
 

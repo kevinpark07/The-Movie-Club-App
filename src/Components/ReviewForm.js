@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Redirect } from 'react-router-dom'
 
 const ReviewForm = (props) => {
     
@@ -14,8 +15,8 @@ const ReviewForm = (props) => {
     }
 
     const submitHandle = event => {
-        
         event.preventDefault();
+        
         let review = props.club.reviews.find(review => review.movie.title === props.club.movies);
         let reviewObj = {
             description: description,
