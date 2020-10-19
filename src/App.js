@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './Components/Header'
 import Home from './Components/Home'
@@ -7,28 +7,38 @@ import MoviesContainer from './Containers/MoviesContainer';
 import MovieClubsContainer from './Containers/MovieClubsContainer'
 import User from './Components/User'
 import Login from './Components/Login'
-import { Route, Switch } from 'react-router-dom'
+import SignUp from './Components/Signup'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 const MOVIE_API = "http://localhost:3000/movies/";
 const USER_API = "http://localhost:3000/users/"
+const MEMBER_API = "http://localhost:3000/members/"
 
 const App = () => {
 
   const [movieApi, setMovieApi] = useState([]);
   const [userApi, setUserApi] = useState([]);
   const [user, setUser] = useState(null);
+  const [memberApi, setMemberApi] = useState([])
+  const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-     fetch(MOVIE_API)
-       .then(res => res.json())
-        .then(movieData => setMovieApi(movieData))
+    fetch(MOVIE_API)
+      .then(res => res.json())
+      .then(movieData => setMovieApi(movieData))
   }, [])
 
   useEffect(() => {
     fetch(USER_API)
       .then(res => res.json())
-       .then(userData => setUserApi(userData))
- }, [])
+      .then(userData => setUserApi(userData))
+  }, [])
+
+  useEffect(() => {
+    fetch(MEMBER_API)
+    .then(res => res.json())
+    .then(memberData => setMemberApi(memberData))
+  }, [])
 
   const login = user => {
     setUser(user)
@@ -38,16 +48,62 @@ const App = () => {
     setUser(el)
   }
 
+  const newUser = (newUser) => {
+    fetch(USER_API, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        accepts: 'application/json'
+      },
+      body: JSON.stringify(newUser)
+    })
+      .then(res => res.json())
+      .then(userInfo => {
+        setUserApi([...userApi, userInfo])
+        login(newUser)
+        setRedirect(!redirect)
+      })
+  }
+
+    const joinClub = (club, user) => {
+      fetch(MEMBER_API, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          accepts: 'application/json'
+        },
+        body: JSON.stringify({
+          club: club, 
+          user: user})
+      })
+      .then(res => res.json())
+      .then(member => {
+        setMemberApi([...memberApi, member])
+      })
+    }
+
+    const leaveClub = (memberId) => {
+      fetch(MEMBER_API + memberId, {
+        method: 'DELETE'
+      }).then(resp => resp.json()).then(mem => {
+        let newArray = memberApi.filter(member => member.id !== memberId)
+        setMemberApi(newArray)
+      })
+    } 
+
   return (
     <div>
+      {console.log(memberApi)}
+      {redirect ? <Redirect to={'/profile'} /> : null}
       <Header />
       <NavBar user={user} logout={logout} />
       <Switch>
+        <Route path='/signup' render={() => <SignUp newUser={newUser} />} />
         <Route path='/login' render={() => <Login users={userApi} login={login} />} />
         <Route path='/home' render={() => <Home users={userApi} user={setUser} />} />
-        <Route path ='/clubs' render={() => <MovieClubsContainer user={user} movies={movieApi} />} />
+        <Route path='/clubs' render={() => <MovieClubsContainer leaveClub={leaveClub} members={memberApi} joinClub={joinClub} user={user} movies={movieApi} />} />
         <Route path='/movies' render={() => <MoviesContainer user={user} movies={movieApi} />} />
-        <Route path='/profile' render={() => <User user={user} users={userApi} />} />
+        <Route path='/profile' render={() => <User members={memberApi} user={user} users={userApi} />} />
       </Switch>
     </div>
   );

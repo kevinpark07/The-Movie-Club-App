@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, NavLink } from 'react-router-dom'
 
 const Login = (props) => {
 
@@ -49,6 +49,9 @@ const Login = (props) => {
             <br></br>
             <br></br>
             <button type="submit">Submit</button>
+            <br></br>
+            <br></br>
+            <h5>Not a User? Click <NavLink to="/signup">here</NavLink> to Sign-Up</h5>
         </form>
 
     )

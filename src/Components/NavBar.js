@@ -24,6 +24,9 @@ const NavBar = (props) => {
                 // <Redirect to='/home' />
                 // :
                 <>
+                <NavLink to="/clubs/create">
+                    <li>Create Club</li>
+                </NavLink>
                 <NavLink to="/profile">
                     <li>Profile</li>
                 </NavLink>
@@ -33,7 +36,7 @@ const NavBar = (props) => {
                 </>
             :
             <NavLink to="/login">
-                <li>Log-In</li>
+                <li>Log-In/Sign-Up</li>
             </NavLink>
            }
         </ul>

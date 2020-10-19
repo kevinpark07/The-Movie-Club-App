@@ -1,7 +1,5 @@
 import React, {useState} from 'react'
 
-
-
 const MessageBoard = (props) => {
 
     const [message, setMessage] = useState("") 
@@ -13,17 +11,20 @@ const MessageBoard = (props) => {
     // })
 
     const messageHandle = event => {
+        console.log(event.target.value)
         setMessage(event.target.value)
     }
     
     const renderMessages = () => {
-       
-        return props.club.messages.map(message => <li>{message.user.username}: {message.content}</li>)
+        let clubMessages = props.messages.filter(message => message.club.id === props.club.id)
+        console.log(clubMessages)
+        return clubMessages.map(message => <li>{message.user.username}: {message.content}</li>)
     }
 
 
     const submitHandle = event => {
         event.preventDefault();
+        // console.log(props.club, props.user, event.target.value)
         props.submitMessage(props.club, props.user, event.target.value)
         setMessage("")  
     }

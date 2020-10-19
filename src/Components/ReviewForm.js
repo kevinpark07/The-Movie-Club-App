@@ -5,6 +5,8 @@ const ReviewForm = (props) => {
     
     const [description, setDescription] = useState("")
     const [rating, setRating] = useState("")
+    const [redirect, setRedirect] = useState(false)
+    const [clubRedirect, setClubRedirect] = useState(false)
 
     const changeHandle = event => {   
         if (event.target.name === "review") {
@@ -17,16 +19,19 @@ const ReviewForm = (props) => {
     const submitHandle = event => {
         event.preventDefault();
         
-        let review = props.club.reviews.find(review => review.movie.title === props.club.movies);
+        let movieTitle = props.club.movies[props.club.movies.length - 1].title
+        let review = props.reviews.find(review => review.movie.title === movieTitle && review.club.id === props.club.id);
         let reviewObj = {
             description: description,
             rating: rating
         }
 
-        if (review.description === "") { 
+        if (review.description === null) { 
+            console.log(review.description)
             props.submit(reviewObj, review.id); 
             setDescription("");
             setRating("");
+            setRedirect(!redirect)
         } else {
             alert("A REVIEW HAS ALREADY BEEN SUBMITTED.");
             setDescription("");
@@ -34,13 +39,19 @@ const ReviewForm = (props) => {
         }
 
     }
+
+    const clubPage = () => {
+        setClubRedirect(!clubRedirect)
+    }
     
     
-    return (
-       <div>
+    return ( 
+        <div>
+        {redirect ? <Redirect to={`/clubs/${props.club.id}/`}/> : null }
+        {clubRedirect ? <Redirect to={`/clubs/${props.club.id}/`}/> : null }
            <h1>Review Form</h1>
            <form onSubmit={submitHandle} >
-               <label>Club Review</label>
+            <label>Club Review for: {props.club.movies[props.club.movies.length - 1].title}</label>
                <p><textarea type="text" name="review" placeholder="Write Review Here" value={description} onChange={changeHandle} /></p>
                <label>Choose Rating (1-5)</label>
                <br></br>
@@ -53,6 +64,7 @@ const ReviewForm = (props) => {
                     <option value={5}>5</option>
                </select>
                <p><button type="submit">Submit</button></p>
+               <p><button onClick={clubPage}>Return to Club Page</button></p>
            </form>
        </div>
         

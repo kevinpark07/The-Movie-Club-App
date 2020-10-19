@@ -4,11 +4,16 @@ import {NavLink} from 'react-router-dom'
 const User = (props) => {
     
     const renderClubs = () => {
-        return props.user.clubs.map(club => 
-            <NavLink to={`/clubs/${club.id}`}>
-                <li>{club.name}</li>
+        let userMember = props.members.filter(member => member.user.id === props.user.id);
+        
+        if (props.user.clubs) {
+        return userMember.map(member => 
+            <NavLink to={`/clubs/${member.club.id}`}>
+                <li>{member.club.name}</li>
             </NavLink>
-        )
+        )} else {
+           return (<li>NO CLUBS JOINED</li>)
+        }
     }
     
     return (

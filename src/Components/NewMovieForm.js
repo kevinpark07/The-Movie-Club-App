@@ -22,15 +22,18 @@ const NewMovieForm = (props) => {
         }
         console.log(foundMovie)
         props.newMovie(newMeeting, foundMovie)
+        setRedirect(!redirect)
     }
 
 
 
     return (
         <div>
+            {redirect ? <Redirect to={`/clubs/${props.club.id}/`} /> : null}
+            {redirect ? <Redirect to={`/clubs/${props.club.id}/`} /> : null}
            <form onSubmit={submitHandle} >
                 <h1>Choose a New Movie & Meeting Time!</h1>
-                <input type="text" name="meetingTime" placeholder="Date of First Meeting" value={meetingTime} onChange={changeHandler} />
+                <input type="text" name="meetingTime" placeholder="Date of Meeting" value={meetingTime} onChange={changeHandler} />
                 <Autocomplete
                     value={movie}
                     onChange={(event, newMovie) => {
