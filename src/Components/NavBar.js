@@ -9,7 +9,7 @@ const NavBar = (props) => {
     }
 
     return (
-        <ul class="navbar">
+        <ul className="navbar">
             <NavLink to="/home">
                 <li>Home</li>
             </NavLink>

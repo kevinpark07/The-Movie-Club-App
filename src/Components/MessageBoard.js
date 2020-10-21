@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import styled from 'styled-components'
 
 const MessageBoard = (props) => {
 
@@ -17,8 +18,7 @@ const MessageBoard = (props) => {
     
     const renderMessages = () => {
         let clubMessages = props.messages.filter(message => message.club.id === props.club.id)
-        console.log(clubMessages)
-        return clubMessages.map(message => <li>{message.user.username}: {message.content}</li>)
+        return clubMessages.map((message, index)=> <p key={index}><b>{message.user.username}</b>: {message.content}</p>)
     }
 
 
@@ -31,14 +31,46 @@ const MessageBoard = (props) => {
 
     return (
         <div>
-            <h1>Message Board!</h1>
-            <ul list-style-type="none">
+            <Header >Chat Room</Header>
+            <MessageContainer>
                 {renderMessages()}
-            </ul>
-            <p><textarea onChange={messageHandle} value={message} /></p>
-            <button onClick={submitHandle} value={message}>Submit</button>
+            </MessageContainer>
+            <p><MessageArea onChange={messageHandle} value={message} /></p>
+            <Button onClick={submitHandle} value={message}>Submit</Button>
         </div>
     )
 }
 
 export default MessageBoard;
+
+
+const MessageContainer = styled.div`
+    border-style: solid;
+    border-color: black;
+    border-radius: 5px;
+    overflow: scroll;
+    background-color: #eee;
+    height: 200px;
+    width: auto;
+`
+
+const Header = styled.h1`
+    text-align: center;
+`
+const MessageArea = styled.textarea`
+    width: 100%;
+`
+
+const Button = styled.button`
+    height: 20px;
+    width: 100px;
+    background: #0066A2;
+    text-shadow:none;
+    margin-top: 2%;
+    border-radius: 10px;
+    font: bold 15px monospace;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+`

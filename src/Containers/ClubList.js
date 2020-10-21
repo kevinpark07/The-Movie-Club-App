@@ -1,19 +1,16 @@
 import React, { Component } from "react";
-import MovieClub from '../Components/MovieClub'
+import Club from '../Components/Club'
 
+const ClubList = (props) => {
 
-const ClubList = (props) =>  {
-
-  const renderClubs = () => {
-    return props.clubs.map(club => <MovieClub key={club.id} club={club} />)
-  }
-
-    return (
-      <div>
-        {renderClubs()}
-      </div>
-    );
+  return (
+    <div>
+      <h1>Club List</h1>
+      {props.clubs.map(club => <Club key={club.id} club={club} />)}
+    </div>
+  );
 }
 
 
 export default ClubList;
+

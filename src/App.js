@@ -9,10 +9,12 @@ import User from './Components/User'
 import Login from './Components/Login'
 import SignUp from './Components/Signup'
 import { Route, Switch, Redirect } from 'react-router-dom'
+import styled from 'styled-components'
 
-const MOVIE_API = "http://localhost:3000/movies/";
-const USER_API = "http://localhost:3000/users/"
-const MEMBER_API = "http://localhost:3000/members/"
+
+const MOVIE_URL = "http://localhost:3000/movies/";
+const USER_URL = "http://localhost:3000/users/"
+const MEMBER_URL = "http://localhost:3000/members/"
 
 const App = () => {
 
@@ -23,19 +25,19 @@ const App = () => {
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    fetch(MOVIE_API)
+    fetch(MOVIE_URL)
       .then(res => res.json())
       .then(movieData => setMovieApi(movieData))
   }, [])
 
   useEffect(() => {
-    fetch(USER_API)
+    fetch(USER_URL)
       .then(res => res.json())
       .then(userData => setUserApi(userData))
   }, [])
 
   useEffect(() => {
-    fetch(MEMBER_API)
+    fetch(MEMBER_URL)
     .then(res => res.json())
     .then(memberData => setMemberApi(memberData))
   }, [])
@@ -49,7 +51,7 @@ const App = () => {
   }
 
   const newUser = (newUser) => {
-    fetch(USER_API, {
+    fetch(USER_URL, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -66,7 +68,7 @@ const App = () => {
   }
 
     const joinClub = (club, user) => {
-      fetch(MEMBER_API, {
+      fetch(MEMBER_URL, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -83,7 +85,7 @@ const App = () => {
     }
 
     const leaveClub = (memberId) => {
-      fetch(MEMBER_API + memberId, {
+      fetch(MEMBER_URL + memberId, {
         method: 'DELETE'
       }).then(resp => resp.json()).then(mem => {
         let newArray = memberApi.filter(member => member.id !== memberId)
@@ -93,7 +95,6 @@ const App = () => {
 
   return (
     <div>
-      {console.log(memberApi)}
       {redirect ? <Redirect to={'/profile'} /> : null}
       <Header />
       <NavBar user={user} logout={logout} />
@@ -105,8 +106,14 @@ const App = () => {
         <Route path='/movies' render={() => <MoviesContainer user={user} movies={movieApi} />} />
         <Route path='/profile' render={() => <User members={memberApi} user={user} users={userApi} />} />
       </Switch>
+      
     </div>
   );
 }
 
 export default App;
+
+
+
+
+

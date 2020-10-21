@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {Redirect} from 'react-router-dom'
+import styled from 'styled-components'
 
 const MovieClubForm = (props) => {
 
@@ -52,15 +53,15 @@ const MovieClubForm = (props) => {
 
 
     return (
-        <div>
+        <Container>
             {redirect ? <Redirect to='/clubs' /> : null}
             <form onSubmit={submitHandle} >
                 <h1>Start A Movie Club!</h1>
-                <input type="text" name="name" placeholder="Insert Club Name Here" value={name} onChange={changeHandle} />
-                <input type="text" name="image" placeholder="Insert Club Image URL Here" value={image} onChange={changeHandle} />
-                <textarea type="text" name="description" placeholder="Insert Club Description Here" value={description} onChange={changeHandle} />
-                <input type="text" name="meetingTime" placeholder="Date of First Meeting" value={meetingTime} onChange={changeHandle} />
-                <Autocomplete
+                <Input type="text" name="name" placeholder="Insert Club Name Here" value={name} onChange={changeHandle} />
+                <Input type="text" name="image" placeholder="Insert Club Image URL Here" value={image} onChange={changeHandle} />
+                <Input type="text" name="meetingTime" placeholder="Date of First Meeting" value={meetingTime} onChange={changeHandle} />
+                <Textarea type="text" name="description" placeholder="Insert Club Description Here" value={description} onChange={changeHandle} />
+                <StyledAutocomplete
                     value={movie}
                     onChange={(event, newMovie) => {
                     setMovie(newMovie);
@@ -71,13 +72,61 @@ const MovieClubForm = (props) => {
                     }}
                     id="controllable-states-demo"
                     options={props.movies.map(movie => movie.title)}
-                    style={{ width: 300 }}
                     renderInput={(params) => <TextField {...params} label="Search Movie" variant="outlined" />}
                 />
-                <button type="submit">Create Club</button>
+                <Button type="submit">Create Club</Button>
             </form>
-        </div>
+        </Container>
     )
 }
 
 export default MovieClubForm;
+
+const Container = styled.div`
+    top: 27%;
+    left: 27%;
+    position: absolute;
+    margin: auto;
+    width: 50%;
+    font: bold 15px monospace;
+    background-color: #f5f8fa;
+    background-radius: 10px;
+    text-align: center;
+
+`
+
+const Input = styled.input`
+    width: 85%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font: 15px monospace;
+`
+
+const Textarea = styled.textarea`
+    width: 85%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font: 15px monospace;
+    margin-bottom: 3%;
+`
+
+const Button = styled.button`
+    height: 40px;
+    width: 150px;
+    background: #0066A2;
+    text-shadow:none;
+    margin-top: 4%;
+    border-radius: 10px;
+    font: bold 15px monospace;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+`
+const StyledAutocomplete = styled(Autocomplete)`
+    margin-left: 7.5%;
+    width: 85%;
+    font-family: monospace;
+`

@@ -136,21 +136,21 @@ const MovieClubsContainer = (props) => {
 
     return (
         <div>
-            { props.user ? 
-            <Switch>
-                <Route path={'/clubs/create'} render={() => <MovieClubForm newClub={newClub} movies={props.movies} />} />
-                <Route path={'/clubs/:id'} render={(routerProps) => {
-                    let id = parseInt(routerProps.match.params.id);
-                    if (clubApi.length > 0) {
-                        let foundClub = clubApi.find(club => club.id === id);
-                        return (<MovieClub leaveClub={props.leaveClub} members={props.members} joinClub={props.joinClub} messages={messageApi} reviewForm={reviewSubmit} newMovie={newMovie} movies={props.movies} user={props.user} submitMessage={submitMessage} removeClub={removeClub} key={foundClub.id} club={foundClub} reviews={reviewApi} />)
-                    }
-                }} />
-                <Route path={'/clubs'} render={() => <ClubList clubs={clubApi} />} />
-            </Switch>
-            : 
-            <Redirect to='/home' />
-           } 
+            { props.user ?
+                <Switch>
+                    <Route path={'/clubs/create'} render={() => <MovieClubForm newClub={newClub} movies={props.movies} />} />
+                    <Route path={'/clubs/:id'} render={(routerProps) => {
+                        let id = parseInt(routerProps.match.params.id);
+                        if (clubApi.length > 0) {
+                            let foundClub = clubApi.find(club => club.id === id);
+                            return (<MovieClub leaveClub={props.leaveClub} members={props.members} joinClub={props.joinClub} messages={messageApi} reviewForm={reviewSubmit} newMovie={newMovie} movies={props.movies} user={props.user} submitMessage={submitMessage} removeClub={removeClub} key={foundClub.id} club={foundClub} reviews={reviewApi} />)
+                        }
+                    }} />
+                    <Route path={'/clubs'} render={() => <ClubList clubs={clubApi} />} />
+                </Switch>
+                :
+                <Redirect to='/home' />
+            }
         </div>
     )
 }
