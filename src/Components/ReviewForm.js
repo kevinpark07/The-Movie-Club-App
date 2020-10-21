@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom'
 import styled from 'styled-components';
 
+const BACKGROUND_URL = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=925&q=80";
+
 const ReviewForm = (props) => {
 
     const [description, setDescription] = useState("")
@@ -48,13 +50,14 @@ const ReviewForm = (props) => {
 
     return (
         <Container>
+            <Image alt="" src={BACKGROUND_URL} />
             {redirect ? <Redirect to={`/clubs/${props.club.id}/`} /> : null}
             {clubRedirect ? <Redirect to={`/clubs/${props.club.id}/`} /> : null}
             <h1>Review Form</h1>
-            <form onSubmit={submitHandle} >
-                <label>Club Review for: {props.club.movies[props.club.movies.length - 1].title}</label>
+            <Form onSubmit={submitHandle} >
+                <label><b>Club Review for:</b> {props.club.movies[props.club.movies.length - 1].title}</label>
                 <p><Textarea type="text" name="review" placeholder="Write Review Here" value={description} onChange={changeHandle} /></p>
-                <label>Choose Rating (1-5)</label>
+                <label><b>Choose Rating (1-5)</b></label>
                 <br></br><br></br>
                 <select name="rating" value={rating} onChange={changeHandle} >
                     <option value={0}>Choose Rating</option>
@@ -66,7 +69,7 @@ const ReviewForm = (props) => {
                 </select>
                 <p><Button type="submit">Submit</Button></p>
                 <p><Button onClick={clubPage}>Return to Club Page</Button></p>
-            </form>
+            </Form>
         </Container>
 
     )
@@ -75,15 +78,25 @@ const ReviewForm = (props) => {
 export default ReviewForm;
 
 const Container = styled.div`
-    top: 27%;
+    position: relative;
+    text-align: center;
+    overflow: scroll;
+`
+const Image = styled.img`
+    width: 100%;
+`
+
+const Form = styled.form`
+    top: 17%;
     left: 27%;
     position: absolute;
     margin: auto;
     width: 50%;
     font: bold 15px monospace;
     background-color: #f5f8fa;
-    background-radius: 10px;
+    border-radius: 10px;
     text-align: center;
+    padding-top: 1%;
 `
 
 const Textarea = styled.textarea`
@@ -92,7 +105,7 @@ const Textarea = styled.textarea`
     margin: 8px 0;
     box-sizing: border-box;
     font: 15px monospace;
-    margin-bottom: 3%;
+    margin-bottom: 2%;
 `
 
 const Button = styled.button`
@@ -100,7 +113,6 @@ const Button = styled.button`
     width: 200px;
     background: #0066A2;
     text-shadow:none;
-    margin-top: 4%;
     border-radius: 10px;
     font: bold 15px monospace;
     display: block;

@@ -25,16 +25,17 @@ export default Club;
 
 const Container = styled.div`
     float: left;
-    width: 24.3%;
-    height: 600px;
+    width: 20.3%;
+    height: 650px;
     margin-bottom: 16px;
-    margin-left: 100px;
+    margin-left: 45px;
     padding: 0 8px;
     display: block;
     font-family: "Courier New",Courier,monospace;
     border: 1px solid gray;
     border-radius: 10px;
     background-color: #1c1f1f;
+    margin-top: 15px;
 `
 
 const Image = styled.img`
@@ -55,6 +56,7 @@ const Info = styled.div`
     padding: 20px;
     height: 40px;
     color: white;
+    text-align: left;
 `
 
 

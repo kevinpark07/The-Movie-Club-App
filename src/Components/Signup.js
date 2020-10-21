@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components'
 
+const BACKGROUND_URL = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=925&q=80";
+
 const Signup = (props) => {
 
     const [user, setUser] = useState("")
@@ -57,7 +59,8 @@ const Signup = (props) => {
 
     return (
         <Container>
-            <form onSubmit={submitHandle} >
+            <Image alt="" src={BACKGROUND_URL} />
+            <Form onSubmit={submitHandle} >
                 <h1>Enter Your Information</h1>
                 <p><Input type='text' name="username" placeholder='Enter Username' value={user} onChange={changeHandle} /></p>
                 <p><Input type='password' name="password" placeholder='Enter Password' value={pass} onChange={changeHandle} /></p>
@@ -66,7 +69,7 @@ const Signup = (props) => {
                 <p><Input type='text' name="email" placeholder='Enter Email Address' value={email} onChange={changeHandle} /></p>
                 <p><Input type='text' name="image" placeholder='Upload Photo' value={photo} onChange={changeHandle} /></p>
                 <Button>Sign-Up</Button>
-            </form>
+            </Form>
         </Container>
     )
 }
@@ -74,7 +77,13 @@ const Signup = (props) => {
 export default Signup;
 
 const Container = styled.div`
-    top: 27%;
+    position: relative;
+    text-align: center;
+    overflow: scroll;
+`
+
+const Form = styled.form`
+    top: 13%;
     left: 27%;
     position: absolute;
     margin: auto;
@@ -83,6 +92,10 @@ const Container = styled.div`
     background-color: #f5f8fa;
     background-radius: 10px;
     text-align: center;
+`
+
+const Image = styled.img`
+    width: 100%;
 `
 
 const Input = styled.input`
@@ -103,5 +116,6 @@ const Button = styled.button`
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 5%;
     color: white;
 `

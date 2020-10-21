@@ -4,6 +4,8 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components'
 
+const BACKGROUND_URL = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=925&q=80";
+
 const NewMovieForm = (props) => {
 
     const [movie, setMovie] = useState("")
@@ -30,9 +32,10 @@ const NewMovieForm = (props) => {
 
     return (
         <Container>
+            <Image alt="" src={BACKGROUND_URL} />
             {redirect ? <Redirect to={`/clubs/${props.club.id}/`} /> : null}
             {redirect ? <Redirect to={`/clubs/${props.club.id}/`} /> : null}
-           <form onSubmit={submitHandle} >
+           <Form onSubmit={submitHandle} >
                 <h1>Choose a New Movie & Meeting Time!</h1>
                 <Input type="text" name="meetingTime" placeholder="Date of Meeting" value={meetingTime} onChange={changeHandler} />
                 <StyledAutocomplete
@@ -46,11 +49,11 @@ const NewMovieForm = (props) => {
                     }}
                     id="controllable-states-demo"
                     options={props.movies.map(movie => movie.title)}
-                    style={{ width: 765 }}
+                    style={{ width: 760 }}
                     renderInput={(params) => <TextField {...params} label="Search Movie" variant="outlined" />}
                 />
                 <Button type="submit">Create Meeting</Button>
-            </form>
+            </Form>
         </Container>
     )
 
@@ -59,15 +62,27 @@ const NewMovieForm = (props) => {
 export default NewMovieForm;
 
 const Container = styled.div`
-    top: 27%;
+    position: relative;
+    text-align: center;
+    overflow: scroll;
+`
+
+const Form = styled.form`
+    top: 15%;
     left: 27%;
     position: absolute;
     margin: auto;
     width: 50%;
     font: bold 15px monospace;
     background-color: #f5f8fa;
-    background-radius: 10px;
+    border-radius: 10px;
     text-align: center;
+    padding-bottom: 1%;
+
+`
+
+const Image = styled.img`
+    width: 100%;
 `
 
 const Input = styled.input`
@@ -80,7 +95,6 @@ const Input = styled.input`
 
 const StyledAutocomplete = styled(Autocomplete)`
     margin-left: 7.5%;
-    width: 85%;
     font-family: monospace;
 `
 

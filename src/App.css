@@ -1,8 +1,20 @@
 ul {
-  list-style-type: none
+  /* list-style-type: none */
 }
 
 ul.navbar li {
   display: inline;
-  margin-left: 5%
+  margin-right: 50px;
+  margin-left: 50px;
+  color: white;
+  /* float: left; */
+  /* font-size: 16px; */
+  text-align: center;
+  padding: 16px 1px;
+  text-decoration: none;
+}
+
+.navbar li:hover {
+  background-color: rgb(87, 87, 87);
+  border-radius: 10px;
 }

@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 
+const BACKGROUND_URL = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=925&q=80";
+
 const Movie = (props) => {
 
     const [reviewClicked, setReviewClicked] = useState(false)
@@ -37,10 +39,11 @@ export default Movie;
 
 const Container = styled.div`
     float: left;
-    width: 24.3%;
+    width: 22.3%;
     height: auto;
+    margin-top: 15px;
     margin-bottom: 16px;
-    margin-left: 100px;
+    margin-left: 19px;
     padding: 0 8px;
     display: block;
     font-family: "Courier New",Courier,monospace;
@@ -57,7 +60,7 @@ const Image = styled.img`
     margin-right: auto;
     margin-top: 10%;
     width: 300px;
-    height: 250px;
+    height: 315px;
     border-radius: 10px;
 `
 
@@ -71,6 +74,7 @@ const Review = styled.div`
     border-color: white;
     border-style: solid;
     border-radius: 5px;
+    border-width: 1px;
     text-align: left;
     margin-top: 5%;
     margin-bottom: 5%;

@@ -94,26 +94,26 @@ const App = () => {
     } 
 
   return (
-    <div>
+    <Container>
       {redirect ? <Redirect to={'/profile'} /> : null}
       <Header />
       <NavBar user={user} logout={logout} />
       <Switch>
         <Route path='/signup' render={() => <SignUp newUser={newUser} />} />
         <Route path='/login' render={() => <Login users={userApi} login={login} />} />
-        <Route path='/home' render={() => <Home users={userApi} user={setUser} />} />
+        <Route path='/home' render={() => <Home user={user} />} />
         <Route path='/clubs' render={() => <MovieClubsContainer leaveClub={leaveClub} members={memberApi} joinClub={joinClub} user={user} movies={movieApi} />} />
         <Route path='/movies' render={() => <MoviesContainer user={user} movies={movieApi} />} />
         <Route path='/profile' render={() => <User members={memberApi} user={user} users={userApi} />} />
       </Switch>
       
-    </div>
+    </Container>
   );
 }
 
 export default App;
 
-
-
-
+const Container = styled.div`
+    background-color: black;
+`
 

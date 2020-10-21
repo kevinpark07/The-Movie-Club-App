@@ -5,6 +5,7 @@ import NewMovieForm from './NewMovieForm';
 import { NavLink, Route, Switch, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
+const BACKGROUND_URL = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=925&q=80";
 
 const MovieClub = (props) => {
 
@@ -33,7 +34,7 @@ const MovieClub = (props) => {
 
     const renderReviews = () => {
         let reviews = props.reviews.filter(review => review.club.id === props.club.id);
-        return reviews.map(review => <li>Movie: {review.movie.title}<p>{review.description}</p><p>{review.rating}</p></li>)
+        return reviews.map(review => <Review><b>Movie: </b>{review.movie.title}<p><b>Review: </b>{review.description}</p><p><b>Rating: </b>{review.rating}</p></Review>)
     }
 
     const joinClub = () => {
@@ -102,37 +103,37 @@ const MovieClub = (props) => {
                 <Route path={`/clubs/${props.club.id}/newMeeting`} render={() => <NewMovieForm newMovie={newMovie} movies={props.movies} club={props.club} />} />
                 <Route path={`/clubs/${props.club.id}/review`} render={() => <ReviewForm submit={props.reviewForm} club={props.club} reviews={props.reviews} />} />
                 <Container>
-                    <p><NavLink to={`/clubs/${props.club.id}`}>
-                        <Image alt={props.club.image} src={props.club.image} />
-                    </NavLink></p>
-                    <ButtonContainer>
-                        {props.removeClub ? clubButton() : null}
-                        {props.removeClub ? deleteButton() : null}
-                        {props.removeClub ? reviewButton() : null}
-                        {props.removeClub ? meetingButton() : null}
-                        {props.removeClub ? leaveButton() : null}
-                    </ButtonContainer>
-                    <Info>
-                        <Title>{props.club.name}</Title>
-                        <p><b>Upcoming Meeting: </b> {props.club.meeting_time}</p>
-                        <p><b>Current Movie: </b> {props.club.movies[props.club.movies.length - 1].title}</p>
-                        <p><b>Club Description: </b> {props.club.description}</p>
-                    </Info>
-                    <Review>
-                        {props.removeClub ?
-                            <>
-                                <h1>Reviews:</h1>
-                                <ul>
-                                    {renderReviews()}
-                                </ul>
-                            </>
-                            :
-                            null}
-                    </Review>
-                    <Message>{props.removeClub ? messageBoard() : null}</Message>
-                    {/* <Footer>
-                        <p>Hi</p>
-                    </Footer> */}
+                    <Background alt="" src={BACKGROUND_URL} />
+                    <InnerContainer>
+                        <p><NavLink to={`/clubs/${props.club.id}`}>
+                            <Image alt={props.club.image} src={props.club.image} />
+                        </NavLink></p>
+                        <ButtonContainer>
+                            {props.removeClub ? clubButton() : null}
+                            {props.removeClub ? deleteButton() : null}
+                            {props.removeClub ? reviewButton() : null}
+                            {props.removeClub ? meetingButton() : null}
+                            {props.removeClub ? leaveButton() : null}
+                        </ButtonContainer>
+                        <Info>
+                            <Title>{props.club.name}</Title>
+                            <p><b>Upcoming Meeting: </b> {props.club.meeting_time}</p>
+                            <p><b>Current Movie: </b> {props.club.movies[props.club.movies.length - 1].title}</p>
+                            <p><b>Club Description: </b> {props.club.description}</p>
+                        </Info>
+                        <ReviewContainer>
+                            {props.removeClub ?
+                                <>
+                                    <h1>Reviews</h1>
+                                    <Reviews>
+                                        {renderReviews()}
+                                    </Reviews>
+                                </>
+                                :
+                                null}
+                        </ReviewContainer>
+                        <Message>{props.removeClub ? messageBoard() : null}</Message>
+                    </InnerContainer>
                 </Container>
             </Switch>
             {redirect ? <Redirect to='/clubs' /> : null}
@@ -143,6 +144,35 @@ const MovieClub = (props) => {
 
 export default MovieClub;
 
+const Reviews = styled.ul`
+    list-style-type: none;
+    text-align: left;
+    height: 700px;
+    overflow: scroll;
+`
+
+const Review = styled.li`
+    border-style: solid;
+    margin-bottom: 2%;
+    border-radius: 5px;
+    margin-left: -40px;
+`
+
+const Background = styled.img `
+    width: 100%;
+    height: auto;
+    z-index: -1;
+    position: absolute;
+    left: 0px;
+    top: 12%;
+`
+
+const InnerContainer = styled.div`
+    z-index: 1;
+    postion: absolute;
+    align-self: center;
+    margin-top: 5%;
+`
 
 const Container = styled.div`
     font-family: "Courier New",Courier,monospace;
@@ -166,7 +196,7 @@ const Title = styled.h1`
 const ButtonContainer = styled.div`
     position: absolute;
     top: 80%;
-    left: 5.5%;
+    left: 11%;
 `
 
 
@@ -180,17 +210,18 @@ const Button = styled.button`
     text-decoration: none;
     outline: none;
     color: #fff;
-    background-color: #4CAF50;
+    background-color: #F74978;
     border: none;
     border-radius: 15px;
-    box-shadow: 0 4px #999;
-    margin-left: 10px;
+    box-shadow: 0 2px #999;
+    margin-left: 20px;
     margin-bottom: 10%
+    font-family: "Courier New",Courier,monospace;
 
-    &:hover {background-color: #3e8e41}
+    &:hover {background-color: #35253a}
     
     &:active {
-        background-color: #3e8e41;
+        background-color: #E32B54;
         box-shadow: 0 5px #666;
         transform: translateY(4px);
     }
@@ -204,7 +235,7 @@ const Info = styled.div`
     background-color: #f5f8fa;
     border-radius: 10px;
 `
-const Review = styled.div`
+const ReviewContainer = styled.div`
     position: absolute;
     top: 50%;
     margin-top: 10%;

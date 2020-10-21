@@ -4,6 +4,8 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import {Redirect} from 'react-router-dom'
 import styled from 'styled-components'
 
+const BACKGROUND_URL = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=925&q=80";
+
 const MovieClubForm = (props) => {
 
     const [name, setName] = useState("")
@@ -54,8 +56,9 @@ const MovieClubForm = (props) => {
 
     return (
         <Container>
+            <Image alt="" src={BACKGROUND_URL} />
             {redirect ? <Redirect to='/clubs' /> : null}
-            <form onSubmit={submitHandle} >
+            <Form onSubmit={submitHandle} >
                 <h1>Start A Movie Club!</h1>
                 <Input type="text" name="name" placeholder="Insert Club Name Here" value={name} onChange={changeHandle} />
                 <Input type="text" name="image" placeholder="Insert Club Image URL Here" value={image} onChange={changeHandle} />
@@ -75,7 +78,7 @@ const MovieClubForm = (props) => {
                     renderInput={(params) => <TextField {...params} label="Search Movie" variant="outlined" />}
                 />
                 <Button type="submit">Create Club</Button>
-            </form>
+            </Form>
         </Container>
     )
 }
@@ -83,7 +86,13 @@ const MovieClubForm = (props) => {
 export default MovieClubForm;
 
 const Container = styled.div`
-    top: 27%;
+    position: relative;
+    text-align: center;
+    overflow: scroll;
+`
+
+const Form = styled.form`
+    top: 15%;
     left: 27%;
     position: absolute;
     margin: auto;
@@ -93,6 +102,10 @@ const Container = styled.div`
     background-radius: 10px;
     text-align: center;
 
+`
+
+const Image = styled.img`
+    width: 100%;
 `
 
 const Input = styled.input`
@@ -124,6 +137,7 @@ const Button = styled.button`
     margin-left: auto;
     margin-right: auto;
     color: white;
+    margin-bottom: 4%;
 `
 const StyledAutocomplete = styled(Autocomplete)`
     margin-left: 7.5%;

@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { NavLink, Redirect } from 'react-router-dom'
+import styled from 'styled-components';
 
 const NavBar = (props) => {
 
@@ -9,38 +10,63 @@ const NavBar = (props) => {
     }
 
     return (
-        <ul className="navbar">
-            <NavLink to="/home">
-                <li>Home</li>
-            </NavLink>
-            <NavLink to="/movies">
-                <li>Movie Collection</li>
-            </NavLink>
-            <NavLink to="/clubs">
-                <li>Browse Movie Clubs</li>
-            </NavLink>
-           { props.user ?
-                // logout ?
-                // <Redirect to='/home' />
-                // :
-                <>
-                <NavLink to="/clubs/create">
-                    <li>Create Club</li>
-                </NavLink>
-                <NavLink to="/profile">
-                    <li>Profile</li>
-                </NavLink>
-                <NavLink to="/home" onClick={logoutHandle}>
-                    <li>Log-Out</li>
-                </NavLink>
-                </>
-            :
-            <NavLink to="/login">
-                <li>Log-In/Sign-Up</li>
-            </NavLink>
-           }
-        </ul>
+        <Nav>
+            <ul className="navbar">
+                <Link to="/home">
+                    <li>Home</li>
+                </Link>
+                <Link to="/movies">
+                    <li>Movie Collection</li>
+                </Link>
+                <Link to="/clubs">
+                    <li>Browse Movie Clubs</li>
+                </Link>
+                {props.user ?
+                    // logout ?
+                    // <Redirect to='/home' />
+                    // :
+                    <>
+                        <Link to="/clubs/create">
+                            <li>Create Club</li>
+                        </Link>
+                        <Link to="/profile">
+                            <li>Profile</li>
+                        </Link>
+                        <Log>
+                        <Link to="/home" onClick={logoutHandle}>
+                            <li>Log-Out</li>
+                        </Link>
+                        </Log>
+                    </>
+                    :
+                    <Log>
+                        <Link to="/login">
+                            <li>Log-In/Sign-Up</li>
+                        </Link>
+                    </Log>
+                }
+            </ul>
+        </Nav>
     )
 }
 
 export default NavBar;
+
+const Link = styled(NavLink)`
+    color: white; 
+    text-decoration: none;  
+
+    &:hover {
+        text-decoration: none;
+        color: #F74978;
+      }
+`
+
+const Nav = styled.div`
+    overflow: hidden;
+    background-color: #131313;
+`
+
+const Log = styled.div`
+    float: right;
+`

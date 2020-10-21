@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import MovieClub from '../Components/MovieClub';
 import MovieClubForm from '../Components/MovieClubForm';
 import Search from '../Components/Search';
-import ClubList from './ClubList'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import ClubList from './ClubList';
+import { Route, Switch, Redirect } from 'react-router-dom';
+
 
 const CLUBS_URL = "http://localhost:3000/clubs/";
 const MESSAGES_URL = "http://localhost:3000/messages/";
@@ -156,3 +157,4 @@ const MovieClubsContainer = (props) => {
 }
 
 export default MovieClubsContainer;
+

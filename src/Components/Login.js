@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Redirect, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
+const BACKGROUND_URL = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=925&q=80";
+
 const Login = (props) => {
 
     const [username, setUsername] = useState("")
@@ -37,7 +39,8 @@ const Login = (props) => {
             <Redirect to="/profile" />
             :
             <Container>
-                <form onSubmit={submitHandle} >
+                <Image alt="" src={BACKGROUND_URL} />
+                <Form onSubmit={submitHandle} >
                     <h1>Login</h1>
                     <label>Username: </label>
                     <Input type="text" name="username" value={username} onChange={changeHandle} />
@@ -50,8 +53,8 @@ const Login = (props) => {
                     <Button type="submit">Submit</Button>
                     <br></br>
                     <br></br>
-                    <h4>Not a User? Click <NavLink to="/signup">here</NavLink> to Sign-Up</h4>
-                </form>
+                    <NotUser>Not a User? Click <Link to="/signup">HERE</Link> to Sign-Up</NotUser>
+                </Form>
             </Container>
     )
 }
@@ -59,15 +62,41 @@ const Login = (props) => {
 export default Login;
 
 const Container = styled.div`
-    top: 27%;
-    left: 27%;
+    position: relative;
+    text-align: center;
+    overflow: scroll;
+`
+
+const Link = styled(NavLink)`
+    color: white; 
+    text-decoration: none;  
+
+    &:hover {
+        text-decoration: none;
+        color: #F74978;
+      }
+`
+
+const NotUser = styled.h4`
+    color: white;
+`
+
+const Image = styled.img`
+    width: 100%;
+`
+
+const Form = styled.form`
+    top: 31.5%;
+    left: 50%;
     position: absolute;
     margin: auto;
-    width: 50%;
+    width: 30%;
     font: bold 15px monospace;
-    background-color: #f5f8fa;
+    background-color: transparent;
     background-radius: 10px;
     text-align: center;
+    transform: translate(-50%, -50%);
+    color: white
 `
 
 const Input = styled.input`
