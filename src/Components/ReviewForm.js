@@ -57,7 +57,7 @@ const ReviewForm = (props) => {
             <Form onSubmit={submitHandle} >
                 <label><b>Club Review for:</b> {props.club.movies[props.club.movies.length - 1].title}</label>
                 <p><Textarea type="text" name="review" placeholder="Write Review Here" value={description} onChange={changeHandle} /></p>
-                <label><b>Choose Rating (1-5)</b></label>
+                <label><b>Choose Rating (1 - 10)</b></label>
                 <br></br><br></br>
                 <select name="rating" value={rating} onChange={changeHandle} >
                     <option value={0}>Choose Rating</option>
@@ -66,6 +66,11 @@ const ReviewForm = (props) => {
                     <option value={3}>3</option>
                     <option value={4}>4</option>
                     <option value={5}>5</option>
+                    <option value={6}>6</option>
+                    <option value={7}>7</option>
+                    <option value={8}>8</option>
+                    <option value={9}>9</option>
+                    <option value={10}>10</option>
                 </select>
                 <p><Button type="submit">Submit</Button></p>
                 <p><Button onClick={clubPage}>Return to Club Page</Button></p>

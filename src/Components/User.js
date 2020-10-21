@@ -31,7 +31,6 @@ const User = (props) => {
                         <Image alt="" src={props.user.profile_image} />
                         <Info>
                             <h1><b>Name:</b> {props.user.name}</h1>
-                            <p><b>Age:</b> {props.user.age}</p>
                             <p><b>Username:</b> {props.user.username}</p>
                             <p><b>Email:</b> {props.user.email}</p>
                             <h3>Clubs:</h3>

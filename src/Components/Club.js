@@ -26,7 +26,7 @@ export default Club;
 const Container = styled.div`
     float: left;
     width: 20.3%;
-    height: 650px;
+    height: 700px;
     margin-bottom: 16px;
     margin-left: 45px;
     padding: 0 8px;

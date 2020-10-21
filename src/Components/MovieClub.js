@@ -12,6 +12,7 @@ const MovieClub = (props) => {
     const [redirect, setRedirect] = useState(false);
     const [review, setReview] = useState(false);
     const [meeting, setMeeting] = useState(false);
+   
 
 
     const removeClubButton = () => {
@@ -91,7 +92,20 @@ const MovieClub = (props) => {
         let memberships = props.members.filter(member => member.club.id === props.club.id)
         let user = memberships.find(member => member.user.id === props.user.id)
         if (user) {
-            return <MessageBoard submitMessage={props.submitMessage} messages={props.messages} club={props.club} user={props.user} />
+            return (
+            <Message>
+                <MessageBoard submitMessage={props.submitMessage} messages={props.messages} club={props.club} user={props.user} />
+            </Message>
+            )
+        }
+        
+    }
+
+    const messages = () => {
+        let memberships = props.members.filter(member => member.club.id === props.club.id);
+        let user = memberships.find(member => member.user.id === props.user.id);
+        if (user) {
+            return 
         }
     }
 
@@ -132,7 +146,7 @@ const MovieClub = (props) => {
                                 :
                                 null}
                         </ReviewContainer>
-                        <Message>{props.removeClub ? messageBoard() : null}</Message>
+                        {messageBoard()}
                     </InnerContainer>
                 </Container>
             </Switch>
